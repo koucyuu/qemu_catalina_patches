@@ -1,0 +1,14 @@
+--- block/file-posix.c.orig	2024-12-14 06:58:36.000000000 +0800
++++ block/file-posix.c	2024-12-14 06:58:23.000000000 +0800
+@@ -3931,6 +3931,11 @@
+ static kern_return_t GetBSDPath(io_iterator_t mediaIterator, char *bsdPath,
+                                 CFIndex maxPathSize, int flags);
+ 
++#if !defined(MAC_OS_VERSION_12_0) \
++    || (MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_VERSION_12_0)
++#define IOMainPort IOMasterPort
++#endif
++
+ static char *FindEjectableOpticalMedia(io_iterator_t *mediaIterator)
+ {
+     kern_return_t kernResult = KERN_FAILURE;

@@ -1,0 +1,14 @@
+--- ui/cocoa.m.orig	2024-12-11 07:46:37.000000000 +0800
++++ ui/cocoa.m	2024-12-14 07:01:34.000000000 +0800
+@@ -613,9 +613,11 @@
+ - (NSSize) screenSafeAreaSize
+ {
+     NSSize size = [[[self window] screen] frame].size;
++#if defined(MAC_OS_VERSION_12_0) && MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_VERSION_12_0
+     NSEdgeInsets insets = [[[self window] screen] safeAreaInsets];
+     size.width -= insets.left + insets.right;
+     size.height -= insets.top + insets.bottom;
++#endif
+     return size;
+ }
+ 

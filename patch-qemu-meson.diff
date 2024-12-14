@@ -1,0 +1,22 @@
+--- meson.build.orig	2024-12-11 07:46:36.000000000 +0800
++++ meson.build	2024-12-14 06:13:45.000000000 +0800
+@@ -315,8 +315,8 @@
+     # ok
+   elif compiler.get_id() == 'clang' and compiler.compiles('''
+       #ifdef __apple_build_version__
+-      # if __clang_major__ < 15 || (__clang_major__ == 15 && __clang_minor__ < 0)
+-      #  error You need at least XCode Clang v15.0 to compile QEMU
++      # if __clang_major__ < 12 || (__clang_major__ == 12 && __clang_minor__ < 0)
++      #  error You need at least XCode Clang 12.0 to compile QEMU
+       # endif
+       #else
+       # if __clang_major__ < 10 || (__clang_major__ == 10 && __clang_minor__ < 0)
+@@ -325,7 +325,7 @@
+       #endif''')
+     # ok
+   else
+-    error('You either need GCC v7.4 or Clang v10.0 (or XCode Clang v15.0) to compile QEMU')
++    error('You either need GCC v7.4 or Clang v10.0 (or XCode Clang v12.0) to compile QEMU')
+   endif
+ endforeach
+ 

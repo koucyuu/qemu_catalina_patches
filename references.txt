@@ -1,0 +1,7 @@
+https://github.com/qemu/qemu/commit/4e035201b961cd545b6801f6656908ecc3055c69
+https://github.com/qemu/qemu/commit/7b60b971cc2f52ed2a69006a2ad709df2831cd67
+https://github.com/qemu/qemu/commit/e9c9d8dc3ba993384bc9553b617120ad4717345c
+https://github.com/qemu/qemu/commit/91aa508d0274deec8b38ac7aeaa7a33f7ffea74a
+https://github.com/qemu/qemu/commit/0e376d45411f026053c21f850797aecd7e48888f
+https://github.com/qemu/qemu/commit/3bf445fbb199676a516202677acda38015fc51a1
+https://github.com/qemu/qemu/commit/f64933c8aee2fd0c46049096f2003f3d156a45ba

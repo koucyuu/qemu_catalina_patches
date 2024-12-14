@@ -1,0 +1,22 @@
+--- Portfile.orig	2024-12-12 15:38:36.000000000 +0800
++++ Portfile	2024-12-14 08:17:58.000000000 +0800
+@@ -72,6 +72,19 @@
+ # MAP_JIT workaround
+ patchfiles-append       patch-qemu-tcg-region.diff
+ 
++# Make Catalina great again
++patchfiles-append       patch-qemu-accel-hvf-hvf-all.diff
++patchfiles-append       patch-qemu-audio-coreaudio.diff
++patchfiles-append       patch-qemu-block-file-posix.diff
++patchfiles-append       patch-qemu-include-qemu-osdep.diff
++patchfiles-append       patch-qemu-meson.diff
++patchfiles-append       patch-qemu-net-vmnet-bridged.diff
++patchfiles-append       patch-qemu-net-vmnet-common.diff
++patchfiles-append       patch-qemu-net-vmnet-host.diff
++patchfiles-append       patch-qemu-net-vmnet-shared.diff
++patchfiles-append       patch-qemu-target-i386-hvf-hvf.diff
++patchfiles-append       patch-qemu-ui-cocoa.diff
++
+ # ERROR: Problem encountered: You either need GCC v7.4 or Clang v10.0 (or XCode Clang v12.0) to compile QEMU
+ compiler.blacklist      {clang < 1200} {macports-clang-[3-9].*} {macports-gcc-[56]} {*gcc-[34].*}
+ if {${os.platform} eq "darwin" && ${os.major} < 11 && [string match *clang* ${configure.compiler}]} {

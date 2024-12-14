@@ -1,0 +1,33 @@
+--- net/vmnet-bridged.m.orig	2024-12-11 07:46:36.000000000 +0800
++++ net/vmnet-bridged.m	2024-12-14 07:59:29.000000000 +0800
+@@ -88,6 +88,15 @@
+         return false;
+     }
+ 
++#if !defined(MAC_OS_VERSION_11_0) || \
++    MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_VERSION_11_0
++    if (options->has_isolated) {
++        error_setg(errp,
++                   "vmnet-bridged.isolated feature is "
++                   "unavailable: outdated vmnet.framework API");
++        return false;
++    }
++#endif
+     return true;
+ }
+ 
+@@ -105,11 +114,12 @@
+     xpc_dictionary_set_string(if_desc,
+                               vmnet_shared_interface_name_key,
+                               options->ifname);
+-
++#if defined(MAC_OS_VERSION_11_0) && \
++    MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_VERSION_11_0
+     xpc_dictionary_set_bool(if_desc,
+                             vmnet_enable_isolation_key,
+                             options->isolated);
+-
++#endif
+     return if_desc;
+ }
+ 

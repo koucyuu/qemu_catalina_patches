@@ -1,0 +1,14 @@
+--- audio/coreaudio.m.orig	2024-12-11 07:46:36.000000000 +0800
++++ audio/coreaudio.m	2024-12-14 07:53:48.000000000 +0800
+@@ -44,6 +44,11 @@
+     bool enabled;
+ } coreaudioVoiceOut;
+ 
++#if !defined(MAC_OS_VERSION_12_0) \
++    || (MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_VERSION_12_0)
++#define kAudioObjectPropertyElementMain kAudioObjectPropertyElementMaster
++#endif
++
+ static const AudioObjectPropertyAddress voice_addr = {
+     kAudioHardwarePropertyDefaultOutputDevice,
+     kAudioObjectPropertyScopeGlobal,

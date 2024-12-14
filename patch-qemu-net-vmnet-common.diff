@@ -1,0 +1,14 @@
+--- net/vmnet-common.m.orig	2024-12-11 07:46:36.000000000 +0800
++++ net/vmnet-common.m	2024-12-14 08:01:11.000000000 +0800
+@@ -47,8 +47,11 @@
+         return "buffers exhausted in kernel";
+     case VMNET_TOO_MANY_PACKETS:
+         return "packet count exceeds limit";
++#if defined(MAC_OS_VERSION_11_0) && \
++    MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_VERSION_11_0
+     case VMNET_SHARING_SERVICE_BUSY:
+         return "conflict, sharing service is in use";
++#endif
+     default:
+         return "unknown vmnet error";
+     }

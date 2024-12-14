@@ -1,0 +1,34 @@
+--- net/vmnet-shared.c.orig	2024-12-11 07:46:36.000000000 +0800
++++ net/vmnet-shared.c	2024-12-14 08:05:43.000000000 +0800
+@@ -21,6 +21,16 @@
+ {
+     const NetdevVmnetSharedOptions *options = &(netdev->u.vmnet_shared);
+ 
++#if !defined(MAC_OS_VERSION_11_0) || \
++    MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_VERSION_11_0
++    if (options->has_isolated) {
++        error_setg(errp,
++                   "vmnet-shared.isolated feature is "
++                   "unavailable: outdated vmnet.framework API");
++        return false;
++    }
++#endif
++
+     if ((options->start_address ||
+          options->end_address ||
+          options->subnet_mask) &&
+@@ -66,11 +76,14 @@
+                                   options->subnet_mask);
+     }
+ 
++#if defined(MAC_OS_VERSION_11_0) && \
++    MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_VERSION_11_0
+     xpc_dictionary_set_bool(
+         if_desc,
+         vmnet_enable_isolation_key,
+         options->isolated
+     );
++#endif
+ 
+     return if_desc;
+ }
