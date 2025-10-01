@@ -1,6 +1,6 @@
---- accel/hvf/hvf-all.c.orig	2024-12-11 07:46:36.000000000 +0800
-+++ accel/hvf/hvf-all.c	2024-12-14 08:15:06.000000000 +0800
-@@ -23,7 +23,10 @@
+--- accel/hvf/hvf-all.c.orig	2025-08-27 02:32:37.000000000 +0800
++++ accel/hvf/hvf-all.c	2025-10-02 06:43:52.000000000 +0800
+@@ -40,7 +40,10 @@
      case HV_NO_RESOURCES: return "HV_NO_RESOURCES";
      case HV_NO_DEVICE:    return "HV_NO_DEVICE";
      case HV_UNSUPPORTED:  return "HV_UNSUPPORTED";
@@ -11,3 +11,18 @@
      default:              return "[unknown hv_return value]";
      }
  }
+@@ -264,11 +267,14 @@
+     }
+ 
+     ret = hvf_arch_vm_create(ms, (uint32_t)pa_range);
++#if defined(MAC_OS_VERSION_11_0) && \
++    MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_VERSION_11_0
+     if (ret == HV_DENIED) {
+         error_report("Could not access HVF. Is the executable signed"
+                      " with com.apple.security.hypervisor entitlement?");
+         exit(1);
+     }
++#endif
+     assert_hvf_ok(ret);
+ 
+     s->num_slots = ARRAY_SIZE(s->slots);
