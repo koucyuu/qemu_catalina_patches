@@ -7,7 +7,7 @@
 +# Make Catalina great again
 +patchfiles-append       patch-qemu-accel-hvf-hvf-all.diff
 +patchfiles-append       patch-qemu-audio-coreaudio.diff
-+patchfiles-append       patch-qemu-block-file-posix.diff
++patchfiles-append       patch-qemu-block-file-posix-2.diff
 +patchfiles-append       patch-qemu-include-qemu-osdep.diff
 +patchfiles-append       patch-qemu-meson.diff
 +patchfiles-append       patch-qemu-net-vmnet-bridged.diff
