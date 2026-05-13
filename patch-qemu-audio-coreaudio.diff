@@ -9,6 +9,6 @@
 +#define kAudioObjectPropertyElementMain kAudioObjectPropertyElementMaster
 +#endif
 +
- static const AudioObjectPropertyAddress voice_addr = {
+ static const AudioObjectPropertyAddress voice_out_addr = {
      kAudioHardwarePropertyDefaultOutputDevice,
      kAudioObjectPropertyScopeGlobal,
